@@ -1,0 +1,8 @@
+# Directories
+.venv/*
+.vscode/*
+# Interim objects
+*.pyc
+.coverage
+# Env variables
+.env
