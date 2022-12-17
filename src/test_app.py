@@ -1,6 +1,6 @@
 import pytest
-from app import inc
 
+from app import inc
 
 test_data = [[-2, -1], [-1, 0], [0, 1], [1, 2]]
 test_name = ["neg-neg", "neg-zero", "zero-pos", "pos-pos"]

@@ -15,22 +15,25 @@ test: format lint mypy unittest
 	@echo -e "All tests complete $(OK_MSG)"
 
 format: .venv
-	@echo -n "==> Checking that code is autoformatted with black..."
+	@echo -n "==> Formating imports with isort..."
+	@.venv/bin/isort --quiet src
+	@echo -e "$(OK_MSG)"
+	@echo -n "==> Formating code with black..."
 	@.venv/bin/black  --quiet --exclude '(.venv)' .
 	@echo -e "$(OK_MSG)"
 
 lint: .venv
-	@echo -n "==> Running flake8..."
+	@echo -n "==> Linting with flake8..."
 	@.venv/bin/flake8 --show-source --statistics $(CODE_LOCATIONS) --exclude=.venv
 	@echo -e "$(OK_MSG)"
 
 mypy: .venv
-	@echo -n "==> Type checking..."
+	@echo -n "==> Type checking with mypy..."
 	@.venv/bin/mypy --no-error-summary $(CODE_LOCATIONS)
 	@echo -e "$(OK_MSG)"
 
 unittest: .venv
-	@echo "==> Running tests..."
+	@echo "==> Running tests with pytest..."
 	@PYTHONPATH=. .venv/bin/pytest $(CODE_LOCATIONS) --cov-report term-missing:skip-covered --cov $(CODE_LOCATIONS) --no-cov-on-fail --cov-fail-under=$(COVERAGE_LIMIT) -W ignore::DeprecationWarning -vv
 
 
