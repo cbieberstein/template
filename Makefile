@@ -1,3 +1,4 @@
+PROJ=newproj
 CODE_LOCATIONS=src
 COVERAGE_LIMIT=100
 
@@ -50,3 +51,10 @@ clean:
 	rm -rf __pycache__
 	rm -rf .mypy_cacne
 	rm -rf .pytest_cache
+
+init: clean
+	rm -rf .git
+	git init
+
+build:
+	docker build -f docker/Dockerfile -t $(PROJ) .
